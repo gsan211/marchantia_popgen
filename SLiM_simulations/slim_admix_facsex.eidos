@@ -1,0 +1,18 @@
+initialize() {
+
+  initializeMutationRate(1e-8);
+  initializeMutationType("m1", 0.5, "f", 0);
+	m1.convertToSubstitution = T;
+ 	initializeGenomicElementType("g1",m1 , 1.0 ); 
+	initializeGenomicElement(g1, 0, 100000000);
+	initializeRecombinationRate(1e-8);
+
+}
+
+1{
+sim.addSubpop("p1", 10000);
+p1.setCloningRate(0.9);
+}
+
+
+100000 late() { p1.outputVCFSample(100,F,'*',F,"slim_facsex_90"+o+".vcf");}
