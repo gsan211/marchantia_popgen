@@ -11,6 +11,7 @@ initialize() {
 
 1{
 sim.addSubpop("p1", 10000);
+//set fac asex rate here, for example 90% asex
 p1.setCloningRate(0.9);
 }
 
