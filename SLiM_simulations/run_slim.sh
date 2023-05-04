@@ -1,12 +1,4 @@
-
-cd "/plas1/george.sandler/marchantia_popgen_newgenome/slim/newsubpop/"
-parallel --jobs 20 /plas1/apps/SLiM.2.4.2/bin/slim -d o={} "/plas1/george.sandler/marchantia_popgen_newgenome/slim/slim_newsubpop.eidos"  ::: 1 2 3 4 5 
-
-
-
-cd "/plas1/george.sandler/marchantia_popgen_newgenome/slim/admix_subpop/"
-parallel --jobs 20 /plas1/apps/SLiM.2.4.2/bin/slim -d o={} "/plas1/george.sandler/marchantia_popgen_newgenome/slim/slim_admix_subpop.eidos"  ::: 1 2 3 4 5 
-
+#run SLiM simulations 
 
 cd "/plas1/george.sandler/marchantia_popgen_newgenome/slim/fac_sex/"
 parallel --jobs 20 /plas1/apps/SLiM.2.4.2/bin/slim -d o={} "/plas1/george.sandler/marchantia_popgen_newgenome/slim/slim_admix_facsex.eidos" ::: 9 10 11 12 13 14 15
