@@ -17,9 +17,9 @@ parallel --jobs 15 'Rscript /plas1/george.sandler/marchantia_popgen_newgenome/in
 
 
 #running the python script to first calculate # bad sites in windows, and then filter those windows using R script 2
-#python script run on each chromosome separately 
+#python script run on each chromosome separately, chromosomes name taken as arg2 
 
-parallel --jobs 15 'python /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/python/Py_genomic_window_filtering.py {}'  :::  Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O Mar_E Mar_U
+parallel --jobs 15 'python /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/python/Py_genomic_window_filtering.py {} chr1'  :::  Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O Mar_E Mar_U
 
 
 
