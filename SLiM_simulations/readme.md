@@ -1,5 +1,7 @@
 # files for running SLiM simulations
+Basic workflow:
 
+Edit SliM eidos file with desired parameters > run slim script in parallell > prepare output for hmmIBDD > run hmmIBD
 
 ## slim_admix_facsex.eidos slim_admix_facsex2k.eidos
 Code for slim simulations with different rates of facultative sex (rate of sex editable within file).
