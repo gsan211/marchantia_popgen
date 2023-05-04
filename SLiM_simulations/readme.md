@@ -1,7 +1,7 @@
-##files for running SLiM simulations
+# files for running SLiM simulations
 
 
-#slim_admix_facsex.eidos slim_admix_facsex2k.eidos
+## slim_admix_facsex.eidos slim_admix_facsex2k.eidos
 Code for slim simulations with different rates of facultative sex (rate of sex editable within file).
 First ile for 10k pop sizes, second for 2k pop sizes
 
