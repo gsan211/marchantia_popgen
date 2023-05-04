@@ -37,7 +37,7 @@ for j in range(0,len(scaffolds)):
 		results.loc[len(results)] = row
  
  
-file_out = "/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/"+sys.argv[1]+"_"+sys.argv[2]+"_UV_windows.txt"
+file_out = "/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/"+sys.argv[1]+"_"+sys.argv[2]+"_chr1_windows.txt"
  
 results.to_csv(file_out, header=None, index=None, sep='\t', mode='a')
 
