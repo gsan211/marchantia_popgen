@@ -6,29 +6,33 @@ samtoolsg=/plas1/george.sandler/apps/samtools-1.8/samtools
 
 
 #parse allelic depth information from pileup file for window analysis
-#parallel --jobs 15 '/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools query /plas1/george.sandler/marchantia_popgen_newgenome/pileup/{}_bcftools.vcf -f "%CHROM\t%POS\t%ALT\t[\t%AD]\n" -o /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/Mar_bcftools_AD_{}.txt'  ::: Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_E Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
+parallel --jobs 15 '/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools query /plas1/george.sandler/marchantia_popgen_newgenome/pileup/{}_bcftools.vcf -f "%CHROM\t%POS\t%ALT\t[\t%AD]\n" -o /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/Mar_bcftools_AD_{}.txt'  ::: Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_E Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
 
+#run R script to separate out allelic depths into different columns from BCFtools output
 
+parallel --jobs 15 'Rscript /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/R_processing_prepy.R {}' ::: Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_E Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
 
 #####################################################################################
+#individual window based filtering
+
 
 #running the python script to first calculate # bad sites in windows, and then filter those windows using R script 2
 #python script run on each chromosome separately 
 
-#parallel --jobs 15 'python /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/python/Py_genomic_window_filtering.py {}'  :::  Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O Mar_E Mar_U
+parallel --jobs 15 'python /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/python/Py_genomic_window_filtering.py {}'  :::  Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O Mar_E Mar_U
 
 
 
-#merge separate windows output together
+#merge separate windows output together (merges chromosomes)
 #cd "/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/"
-#for ind in Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O
-#do
-#cat /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_*_windows.txt >  /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_allwindows.txt
+for ind in Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O
+do
+cat /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_*_windows.txt >  /plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_allwindows.txt
 
-#done 
+done 
 
-
-#parallel --jobs 7 '/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/R_processing2.R {}'  :::  Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
+#takes in window input, chooses bad windows (2 or more bad sites in individual), merges all bad windows together and writes output file for filtering in BCFtools
+parallel --jobs 7 '/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/R_processing2.R {}'  :::  Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
 
 
 
@@ -36,53 +40,45 @@ samtoolsg=/plas1/george.sandler/apps/samtools-1.8/samtools
 ####################################################################################
 
 
-#call SNPs and remove bad regions, then need to do individual level filtering
+#call SNPs 
 
-#parallel --jobs 15 '/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools call -Ov -m /plas1/george.sandler/marchantia_popgen_newgenome/pileup/{}_bcftools.vcf --ploidy 1 -T ^/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/{}_bad_windows.txt > /plas1/george.sandler/marchantia_popgen_newgenome/calls/{}_calls.vcf'  ::: Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
-
-
+parallel --jobs 15 '/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools call -Ov -m /plas1/george.sandler/marchantia_popgen_newgenome/pileup/{}_bcftools.vcf --ploidy 1  > /plas1/george.sandler/marchantia_popgen_newgenome/calls/{}_calls.vcf'  ::: Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O 
 
 
-########### to isolate chromosome 1, not needed for full pipeline
-#for ind in Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O
-#do
-#grep -e "#" -e "chr1" /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls.vcf > /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_chr1.vcf
-#done
-#############
-
-
- 
+#do individual level filtering on SNPs including coverage, and removing bad regions 
 #remove indels, low coverage sites within samples, bad regions
-#for ind in  Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O
-#do
-#/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools filter -Ov /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls.vcf -e 'TYPE = "indel"| INFO/DP<3' -T ^/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_bad_windows.txt> /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf
+for ind in  Mar_E Mar_U Mar_S Mar_J Mar_N Mar_D Mar_beta Mar_T Mar_L Mar_Y Mar_G Mar_H Mar_K Mar_M Mar_O
+do
 
-#/plas1/george.sandler/apps/htslib/bgzip  /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf
-#/plas1/george.sandler/apps/htslib/tabix /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf.gz
+/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools filter -Ov /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls.vcf -e 'TYPE = "indel"| INFO/DP<3' -T ^/plas1/george.sandler/marchantia_popgen_newgenome/individual_filtering/windows_analysis_output/${ind}_bad_windows.txt> /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf
 
-
-#done 
+/plas1/george.sandler/apps/htslib/bgzip  /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf
+/plas1/george.sandler/apps/htslib/tabix /plas1/george.sandler/marchantia_popgen_newgenome/calls/${ind}_calls_filtered.vcf.gz
 
 
-
-
-
-#merge
-#cd "/plas1/george.sandler/marchantia_popgen_newgenome/calls/"
-#/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools merge -Ov /plas1/george.sandler/marchantia_popgen_newgenome/calls/*_calls_filtered.vcf.gz > /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered.vcf
+done 
 
 
 
+
+
+#merge individuals
+cd "/plas1/george.sandler/marchantia_popgen_newgenome/calls/"
+/plas1/george.sandler/apps/bcftools-1.10.2/bin/bcftools merge -Ov /plas1/george.sandler/marchantia_popgen_newgenome/calls/*_calls_filtered.vcf.gz > /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered.vcf
+
+
+#subspecies level filtering
 #filter sites where more than 2/3 samples is missing, and sites where total depth over 80 polymorpha
 
-#$bcftoolsg filter -Ov -e 'TYPE = "indel"' /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered.vcf|\
-#$bcftoolsg filter -Ov -e 'N_ALT >1' | \
-#$bcftoolsg filter -Ov -e 'F_MISSING > 0.32' | \
-#$bcftoolsg filter -Ov -e 'F_PASS(FORMAT/DP< 1) > 0.32' | \
-#$bcftoolsg filter -Ov -e 'INFO/DP < 5' | \
-#$bcftoolsg filter -Ov -e 'INFO/DP > 200' >  /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.vcf
+$bcftoolsg filter -Ov -e 'TYPE = "indel"' /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered.vcf|\
+$bcftoolsg filter -Ov -e 'N_ALT >1' | \
+$bcftoolsg filter -Ov -e 'F_MISSING > 0.32' | \
+$bcftoolsg filter -Ov -e 'F_PASS(FORMAT/DP< 1) > 0.32' | \
+$bcftoolsg filter -Ov -e 'INFO/DP < 5' | \
+$bcftoolsg filter -Ov -e 'INFO/DP > 200' >  /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.vcf
 
-#$bcftoolsg query /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.vcf -f "%CHROM\t%POS\t%ALT\t[\t%GT]\n" -o /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.GTS.txt
+#query output genotypes to usable table for downstream diversity estimates etc.
+$bcftoolsg query /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.vcf -f "%CHROM\t%POS\t%ALT\t[\t%GT]\n" -o /plas1/george.sandler/marchantia_popgen_newgenome/calls/Mar_all_filtered_secondround.GTS.txt
 
 
 
