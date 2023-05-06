@@ -15,14 +15,11 @@ Script for calculating pi based on genotype table generated after all filtering 
 ## R_calculate_pi_within _sbsp.R
 Scripts for calculating d_xy between subspecies
 
-
-
-#####################
-
-
-## Downstream analyses
+# Downstream analyses
 ## SLiM_simualtions
 Scripts for running simulatotions and calculating IBD statistics
 
 ## regression
 Scripts and file inputs for running regression of various genomic featurs and diversity/diverence
+
+#todo hmmibd, snpeff
