@@ -10,16 +10,16 @@ Script for aligning data, read processing and generating bcftools mpileup files 
 Scripts for filtering of mpileup files and generating combined VCF of genotype calls
 
 ## R_calculate_pi_dxy.R
-Script for calculating pi based on genotype table generated after all filtering done in previous steo
+Script for calculating pi based on genotype table generated after all filtering done in previous step
 
 ## R_calculate_pi_within _sbsp.R
 Scripts for calculating d_xy between subspecies
 
 # Downstream analyses
 ## SLiM_simualtions
-Scripts for running simulatotions and calculating IBD statistics
+Scripts for running simulations and calculating IBD statistics
 
 ## regression
 Scripts and file inputs for running regression of various genomic featurs and diversity/diverence
 
-#todo hmmibd, snpeff
+#todo hmmibd, snpeff, 
