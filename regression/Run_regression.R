@@ -65,7 +65,7 @@ boot_summary(modpi, R = 999)
 ########
 
 moddxy <- lm(d_xy_meanm ~ V1 + scale(frac_utr) + scale(frac_cds) + scale(frac_GC) + scale(ling_complex) + scale(exp) + scale(d_xy_n), data = win6)
-summary(moddxy)
+summary(moddxy, R = 999)
 
 win9 = win6
 win9$winpi = NULL
