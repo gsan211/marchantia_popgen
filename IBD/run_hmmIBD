@@ -1,0 +1,13 @@
+cd /plas1/george.sandler/marchantia_popgen_newgenome/IBD/
+
+
+#if necessary sort
+(zgrep "^chrom" /plas1/george.sandler/marchantia_popgen_newgenome/IBD/Mar_all_unfiltered_variant_autosomes_hmmibd_input.txt; \
+ zgrep -v "^chrom" /plas1/george.sandler/marchantia_popgen_newgenome/IBD/Mar_all_unfiltered_variant_autosomes_hmmibd_input.txt | \
+ sort -k1,1n -k2,2n) > /plas1/george.sandler/marchantia_popgen_newgenome/IBD/Mar_all_unfiltered_variant_autosomes_sorted_hmmibd_input.txt
+
+
+
+#custom recobm and #chroms 
+"/plas1/george.sandler/apps/hmmibd/hmmIBD/hmmIBD_custom_rho" -i /plas1/george.sandler/marchantia_popgen_newgenome/IBD/Mar_all_variant_autosomes_hmmibd_input.txt -o /plas1/george.sandler/marchantia_popgen_newgenome/IBD/hmmibd_output/Mar_all_variant_customrho
+
