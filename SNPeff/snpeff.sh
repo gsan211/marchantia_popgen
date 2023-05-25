@@ -52,6 +52,8 @@ grep -e "#" -e "intergenic" "/plas1/george.sandler/marchantia_popgen_newgenome/s
 
 
 ##############
+#query VCF to more usable text file. Can then calculate diversity stats with other R scripts etc. 
+
 for ind in Mar_all_filtered_5primeUTR Mar_all_filtered_3primeUTR Mar_all_filtered_all_splice_site_intron Mar_all_filtered_allintron Mar_all_filtered_allintergenic
 do
 
