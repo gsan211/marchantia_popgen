@@ -22,4 +22,8 @@ Scripts for running simulations and calculating IBD statistics
 ## regression
 Scripts and file inputs for running regression of various genomic featurs and diversity/diverence
 
-#todo hmmibd, snpeff, 
+## IBD
+Scripts to run hmmIBD and recreate output for analyses of IBD segments
+
+## SNPeff
+Scripts to run SNPeff to functionally annotate sites (e.g 4fold, 0fold, UTR etc)
