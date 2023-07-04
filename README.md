@@ -30,3 +30,6 @@ Scripts to run hmmIBD and recreate output for analyses of IBD segments
 
 ## SNPeff
 Scripts to run SNPeff to functionally annotate sites (e.g 4fold, 0fold, UTR etc)
+
+## transcriptome
+Scripts to download gene expression data, align to reference and calculate expression statistics such as expression quartile
