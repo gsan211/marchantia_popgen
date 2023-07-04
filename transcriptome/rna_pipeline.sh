@@ -1,6 +1,6 @@
 cd "/plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/"
 
-#download files from JGI
+#download files from JGI, need to enter own credential in jgi-query.config!!!!!!!!!!!!
 python "/plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/jgi-query.py " Marpolnscriptome
 
 1:1-8
@@ -44,7 +44,6 @@ awk '$3 == "mRNA"' /plas1/george.sandler/marchantia_popgen_newgenome/reference_n
 cd "/plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/"
 paste Marchantia_antheridia_htseq_counts.txt Marchantia_archegonia_htseq_counts.txt Marchantia_sporophyte_htseq_counts.txt Marchantia_thallus_htseq_counts.txt >  Marchantia_htseq_counts.txt 
 
-#manually edited header
 
 
 
