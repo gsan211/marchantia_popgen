@@ -7,5 +7,5 @@ Runs STAR to align data to genome, and HTSeq to get read counts for relevant gen
 ## R_run_Deseq.R
 Takes input from HTSeq and runs DEseq 2. Produces normalized read counts/expression levels across all 4 tissues.
 
-## espression_quartiles.R
+## expression_quartiles.R
 Takes as input output from Deseq and calculates expression quartiles of genes based on normalized expression data, writes output for other scripts to use (regression analyses/DFE alpha etc)
