@@ -22,6 +22,9 @@ Scripts for running simulations and calculating IBD statistics
 ## regression
 Scripts and file inputs for running regression of various genomic featurs and diversity/diverence
 
+## LD
+Scripts to explore LD decay in genome
+
 ## IBD
 Scripts to run hmmIBD and recreate output for analyses of IBD segments
 
