@@ -3,6 +3,7 @@ R
 library(data.table)
 library(GenomicRanges)
 
+#file input from snpeff analysis
 df = fread("/plas1/george.sandler/marchantia_popgen_newgenome/snpeff/genes_list_tabs_unique.list")
 
 dt <- makeGRangesFromDataFrame(df, seqnames.field = "V1", start.field = "V2", end.field = "V3")
@@ -18,7 +19,7 @@ n
 #first tab seperated file of windows from R
 cd  "/plas1/george.sandler/marchantia_popgen_newgenome/bedtools/"
 
-
+#-a file is simply genome split into 10kb chunks matched to sliding windowed analysis, copy found in this directory
 bedtools intersect -a "/plas1/george.sandler/marchantia_popgen_newgenome/bedtools/10k_windows" -b "/plas1/george.sandler/marchantia_popgen_newgenome/snpeff/genes_list_tabs_unique_collapsed.list" -wao > "/plas1/george.sandler/marchantia_popgen_newgenome/bedtools/10k_windows_coding_intersect.txt"
 
 #calculate GC contect of windows
