@@ -6,3 +6,5 @@ Then when you run SNPeff on this file, it spits out annotations on all possile s
 
 The script then matches these annotations for each site to pull sites of interest. 
 
+## genes_list_tabs_unique
+File generated during snpeff annotation that lists genes and coordinates. Copy of this file with i=only unique lines (alternative splicing removed) for downstream analyses
