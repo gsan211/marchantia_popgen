@@ -33,6 +33,9 @@ dds <- DESeq(dds)             #RUN DESEQ2
 res <- results(dds, tidy=TRUE)
 #head(results(dds, tidy=TRUE))
 
+#output results from all sites for expression quartiles analysis
+write.table(ids_sporo, "/plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/Marchantia_deseq_sporo_v_other_output.txt", sep = "\t", col.names = F, row.names = F, quote = F)
+
 res <- res[order(res$padj),]
 
 res2 = res[res$padj <0.05,]
@@ -50,5 +53,6 @@ ids[,5:7] = NULL
 ids_sporo = ids[ids$V4 %in% sporo_over$row,]
 ids_sporo$V4 = NULL
 
+#significantly differntialy expressed genes
 write.table(ids_sporo, "/plas1/george.sandler/marchantia_popgen_newgenome/revisions/dfe_sporo/Marchantia_sporo_overexpressed_FDR005_sites.txt", sep = "\t", col.names = F, row.names = F, quote = F)
 
