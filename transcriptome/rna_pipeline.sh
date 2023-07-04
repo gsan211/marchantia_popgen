@@ -6,7 +6,7 @@ python "/plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/jgi-quer
 1:1-8
 
 
-
+#need to manually rename input files from id's given to them by JGI. I did this by comparing ID's of files in JGI/NCBI SRA to downloaded files, renamed to sporophyte/thallus/arhcegonia/antheridia
 #split files
 
 cd /plas1/george.sandler/marchantia_popgen_newgenome/transcriptome/fastq/
