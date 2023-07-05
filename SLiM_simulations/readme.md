@@ -18,3 +18,6 @@ R script to take vcf output from SLiM and edit into input format for hmmIBD
 
 ## runhmmibd.sh
 bash script to run hmmIBD on output of SLiM simulations in parallel
+
+## automated_hmmibd.sh
+Script to automatically take SLiM output, prepare for and run hmmIBD
