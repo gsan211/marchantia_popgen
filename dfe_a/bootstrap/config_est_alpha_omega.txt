@@ -1,0 +1,8 @@
+data_path_1   /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/tables/data/
+divergence_file        /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/bootstrap/bootstrapped_divergence
+est_alpha_omega_results_file    /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/bootstrap/dfe_output_est_alpha_omega
+est_dfe_results_file    /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/bootstrap/sel/est_dfe.out
+neut_egf_file           /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/bootstrap/neut/neut_egf.out
+sel_egf_file            /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/bootstrap/sel/sel_egf.out
+do_jukes_cantor         1
+remove_poly             0
