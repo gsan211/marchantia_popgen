@@ -1,0 +1,10 @@
+data_path_1  /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/tables/data/
+sfs_input_file  /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/SFS_unfolded_input_splice_site_intron.txt
+est_dfe_results_dir     /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/results_neut/
+site_class 0
+fold       1
+epochs     2
+search_n2       1
+t2_variable  1
+t2 1000
+

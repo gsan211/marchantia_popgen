@@ -1,0 +1,12 @@
+data_path_1  /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/tables/data/
+sfs_input_file  /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/SFS_unfolded_input_splice_site_intron.txt
+est_dfe_results_dir    /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/expanded_categories/sel/
+est_dfe_demography_results_file     /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/results_neut/est_dfe.out
+site_class 1
+fold       1
+epochs     2
+mean_s_variable 1
+mean_s -0.1
+beta_variable 1
+beta 0.5
+
