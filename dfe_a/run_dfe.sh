@@ -11,3 +11,10 @@ cd "/plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/"
 
 #
 /plas1/george.sandler/apps/dfe_alpha/dfe-alpha-release-2.16/prop_muts_in_s_ranges -c /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/sel/est_dfe.out -o CHECK
+
+
+############
+#estimate alpha/omega
+
+/plas1/george.sandler/apps/dfe_alpha/dfe-alpha-release-2.16/est_alpha_omega -c /plas1/george.sandler/marchantia_popgen_newgenome/dfe_a/config_est_alpha_omega.txt
+
